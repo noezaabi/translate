@@ -2,14 +2,6 @@ import { OpenAIStream, OpenAIStreamPayload } from "@/lib/openAIStream";
 import { currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
-if (!process.env.OPENAI_API_KEY) {
-  throw new Error("Missing env var from OpenAI");
-}
-
-export const config = {
-  runtime: "edge",
-};
-
 export async function POST(req: Request): Promise<Response> {
   const user = await currentUser();
   const { prompt } = (await req.json()) as {
